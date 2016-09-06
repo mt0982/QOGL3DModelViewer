@@ -23,17 +23,7 @@ void GLWidget::initializeGL()
     program.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/Shader/program.frag");
     program.link();
 
-    /* Object */
-//    float s = 0.1;
-//    QVector<QVector3D> vertices = {{-s, -s, 0}, {s, -s, 0}, {s, s, 0}, {-s, s, 0}};
-//    QVector<QVector3D> colors = {{0.2, 0.3, s}, {0.7, 0.3, 0.7}, {0.5, 0.4, s}, {0.9, 0.8, 0.3}};
-//    QVector<uint> indices = {0, 1, 2, 0, 2, 3};
-
-//    screen.init();
-//    screen.setAttribute(0, vertices, program);
-//    screen.setAttribute(1, colors, program);
-//    screen.setIndices(indices);
-
+    /* Init Model Loader */
     modelLoader.init(program);
 }
 
@@ -46,6 +36,8 @@ void GLWidget::paintGL()
     program.bind();
     program.setUniformValue("MVMat", MVMat);
     program.setUniformValue("ProjMat", ProjMat);
+    program.setUniformValue("cameraPosition", camera.getPosition());
+    program.setUniformValue("lightPosition", QVector3D(0, 2, 1));
     modelLoader.render();
     program.release();
 }
