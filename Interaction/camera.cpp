@@ -4,7 +4,7 @@ Camera::Camera()
 {
     viewDirection = QVector3D(0.0f, 0.0f, -1.0f);
     UP = QVector3D(0.0f, 1.0f, 0.0f);
-    position = QVector3D(0.0f, 0.0f, 4.0f);
+    position = QVector3D(0.0f, 0.0f, 1.0f);
     movementSpeed = 0.1f;
 }
 

@@ -19,22 +19,22 @@ void GLWidget::initializeGL()
     glClearColor(0.0, 0.0, 0.0, 1.0);
     glEnable(GL_DEPTH_TEST);
 
-    program.addShaderFromSourceFile(QOpenGLShader::Vertex,
-                                    "/home/asus/Programy/Qt/Projekty/QOGL3DModelViewer/Shader/program.vert");
-    program.addShaderFromSourceFile(QOpenGLShader::Fragment,
-                                    "/home/asus/Programy/Qt/Projekty/QOGL3DModelViewer/Shader/program.frag");
+    program.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/Shader/program.vert");
+    program.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/Shader/program.frag");
     program.link();
 
     /* Object */
-    float s = 0.1;
-    QVector<QVector3D> vertices = {{-s, -s, 0}, {s, -s, 0}, {s, s, 0}, {-s, s, 0}};
-    QVector<QVector3D> colors = {{0.2, 0.3, s}, {0.7, 0.3, 0.7}, {0.5, 0.4, s}, {0.9, 0.8, 0.3}};
-    QVector<uint> indices = {0, 1, 2, 0, 2, 3};
+//    float s = 0.1;
+//    QVector<QVector3D> vertices = {{-s, -s, 0}, {s, -s, 0}, {s, s, 0}, {-s, s, 0}};
+//    QVector<QVector3D> colors = {{0.2, 0.3, s}, {0.7, 0.3, 0.7}, {0.5, 0.4, s}, {0.9, 0.8, 0.3}};
+//    QVector<uint> indices = {0, 1, 2, 0, 2, 3};
 
-    screen.init();
-    screen.setAttribute(0, vertices, program);
-    screen.setAttribute(1, colors, program);
-    screen.setIndices(indices);
+//    screen.init();
+//    screen.setAttribute(0, vertices, program);
+//    screen.setAttribute(1, colors, program);
+//    screen.setIndices(indices);
+
+    modelLoader.init(program);
 }
 
 void GLWidget::paintGL()
@@ -46,7 +46,7 @@ void GLWidget::paintGL()
     program.bind();
     program.setUniformValue("MVMat", MVMat);
     program.setUniformValue("ProjMat", ProjMat);
-    screen.render();
+    modelLoader.render();
     program.release();
 }
 

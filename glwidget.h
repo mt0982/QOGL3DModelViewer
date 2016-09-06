@@ -18,6 +18,7 @@
 #include <QTimer>
 #include <mesh.h>
 #include <Interaction/camera.h>
+#include <Loader/modelloader.h>
 
 class GLWidget: public QOpenGLWidget, protected QOpenGLFunctions_4_5_Core
 {
@@ -36,7 +37,7 @@ private:
     QOpenGLTexture *ambientMap;
     QOpenGLTexture *specularMap;
 
-    Mesh screen;
+    ModelLoader modelLoader;
 
 public:
     explicit GLWidget(QWidget *parent = 0);

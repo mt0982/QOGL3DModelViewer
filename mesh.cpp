@@ -158,7 +158,7 @@ void Mesh::calculateNormals(QVector<QVector3D> &vert, QVector<QVector3D> &norm, 
 
 void Mesh::parseOBJ(QVector<QVector3D> &vertices, QVector<uint> &indices)
 {
-    ifstream in("/home/asus/Programy/Qt/Projekty/LowPolyGame/OBJ/tree01.obj", ios::in);
+    ifstream in("/home/asus/Pulpit/untitled.obj", ios::in);
     if (!in) {
         qDebug() << "Cannot open OBJ file";
     }
