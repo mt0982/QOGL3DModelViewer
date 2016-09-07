@@ -2,7 +2,7 @@
 
 ModelLoader::ModelLoader(): isDiffuse(false), isNormal(false), isAmbient(false), isSpecular(false)
 {
-    //path = "/home/asus/Programy/Qt/Projekty/QOGL3DModelViewer/Example/Imrod/ImrodLowPoly.obj";
+
 }
 
 void ModelLoader::init(QOpenGLShaderProgram &program)

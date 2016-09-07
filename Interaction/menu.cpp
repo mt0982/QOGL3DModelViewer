@@ -59,14 +59,46 @@ QString Menu::getModelPath()
 void Menu::on_buttonDiffuseMap_clicked()
 {
     /* Open Diffuse Map */
-    QString filename = QFileDialog::getOpenFileName(this, "Open a File", "", "Model (*.jpg, *.png)");
-    modelPath = filename;
+    QString filename = QFileDialog::getOpenFileName(this, "Open a File", "/home/asus/Pulpit", "Diffuse (*.jpg *.png)");
+    diffusePath = filename;
 
     /* File Name */
     QFileInfo file(filename);
-    setWindowTitle(file.baseName());
+    ui->labelDiffuseMap->setText("Diffuse Map: " + file.baseName().toLatin1());
 }
 
+void Menu::on_buttonNormalMap_clicked()
+{
+    /* Open Normal Map */
+    QString filename = QFileDialog::getOpenFileName(this, "Open a File", "/home/asus/Pulpit", "Normal (*.jpg *.png)");
+    normalPath = filename;
+
+    /* File Name */
+    QFileInfo file(filename);
+    ui->labelNormalMap->setText("Normal Map: " + file.baseName().toLatin1());
+}
+
+void Menu::on_buttonAmbientMap_clicked()
+{
+    /* Open Ambient Map */
+    QString filename = QFileDialog::getOpenFileName(this, "Open a File", "/home/asus/Pulpit", "Ambient (*.jpg *.png)");
+    ambientPath = filename;
+
+    /* File Name */
+    QFileInfo file(filename);
+    ui->labelAmbientMap->setText("Ambient Map: " + file.baseName().toLatin1());
+}
+
+void Menu::on_buttonSpecularMap_clicked()
+{
+    /* Open Specular Map */
+    QString filename = QFileDialog::getOpenFileName(this, "Open a File", "/home/asus/Pulpit", "Specular (*.jpg *.png)");
+    specularPath = filename;
+
+    /* File Name */
+    QFileInfo file(filename);
+    ui->labelSpecularMap->setText("Specular Map: " + file.baseName().toLatin1());
+}
 
 
 

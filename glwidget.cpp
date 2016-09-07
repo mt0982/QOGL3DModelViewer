@@ -52,12 +52,17 @@ void GLWidget::paintGL()
     lightPosition = QVector3D(x, 1, z);
 
     /* Set File Path */
-    qDebug() << menu->getModelPath();
     if(!menu->getModelPath().isEmpty()) {
         modelLoader.setFilePath(menu->getModelPath(), true, program);
         menu->setModelPath("");
     } else {
         modelLoader.setFilePath(menu->getModelPath(), false, program);
+    }
+
+    /* Set Textures */
+    if(!menu->diffusePath.isEmpty()) {
+        modelLoader.setDiffuseMap(menu->diffusePath);
+        menu->diffusePath = "";
     }
 
     /* Render Object */
