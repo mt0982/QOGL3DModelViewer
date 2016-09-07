@@ -29,6 +29,8 @@ void GLWidget::initializeGL()
     /* Texture */
     modelLoader.setDiffuseMap("/home/asus/Programy/Qt/Projekty/QGLScreenLock/Object/Imrod/Imrod_Diffuse.jpg");
     modelLoader.setNormalMap("/home/asus/Programy/Qt/Projekty/QGLScreenLock/Object/Imrod/Imrod_norm.jpg");
+    modelLoader.setAmbientMap("/home/asus/Programy/Qt/Projekty/QGLScreenLock/Object/Imrod/Imrod_Illumination.jpg");
+    modelLoader.setSpecularMap("/home/asus/Programy/Qt/Projekty/QGLScreenLock/Object/Imrod/Imrod_spec.jpg");
 }
 
 void GLWidget::paintGL()

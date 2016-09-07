@@ -16,6 +16,11 @@ private:
     QOpenGLTexture *ambientMap;
     QOpenGLTexture *specularMap;
 
+    bool isDiffuse;
+    bool isNormal;
+    bool isAmbient;
+    bool isSpecular;
+
 public:
     ModelLoader();
     void init(QOpenGLShaderProgram &program);

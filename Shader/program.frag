@@ -9,6 +9,12 @@ uniform vec3 cameraPosition;
 uniform vec3 lightPosition;
 uniform sampler2D diffuseMap;
 uniform sampler2D normalMap;
+uniform sampler2D ambientMap;
+uniform sampler2D specularMap;
+
+uniform bool isNormal;
+uniform bool isAmbient;
+uniform bool isSpecular;
 
 out vec4 outColor;
 
@@ -33,10 +39,12 @@ void main(void)
     vec3 color = texture2D(diffuseMap, UV).xyz; //baseColor;
 
     /* Normals */
-    vec3 normal = CalcBumpedNormal();
+    vec3 normal = N;
+    if(isNormal) normal = CalcBumpedNormal();
 
     /* Ambient */
     vec3 ambient = 0.35 * color;
+    if(isAmbient) ambient = texture2D(ambientMap, UV).xyz * color;
 
     /* Diffuse */
     vec3 lightDir = normalize(lightPosition - fragPosition);
@@ -50,6 +58,18 @@ void main(void)
     vec3 halfwayDir = normalize(lightDir + viewDir);
     spec = pow(max(dot(normal, halfwayDir), 0.0), 32.0);
     vec3 specular = vec3(0.3) * spec;
+    if(isSpecular) specular = texture2D(specularMap, UV).xyz * spec;
 
     outColor = vec4(ambient + diffuse + specular, 1.0);
 }
+
+
+
+
+
+
+
+
+
+
+

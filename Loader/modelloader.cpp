@@ -1,6 +1,6 @@
 #include "modelloader.h"
 
-ModelLoader::ModelLoader()
+ModelLoader::ModelLoader(): isDiffuse(false), isNormal(false), isAmbient(false), isSpecular(false)
 {
 
 }
@@ -46,8 +46,14 @@ void ModelLoader::init(QOpenGLShaderProgram &program)
 
 void ModelLoader::render(QMatrix4x4 MVMat, QMatrix4x4 ProjMat, QVector3D eyePos, QVector3D lightPos, QOpenGLShaderProgram &p)
 {
-    diffuseMap->bind(0);
-    normalMap->bind(1);
+    /* Check Texture */
+    if(isDiffuse) {
+        diffuseMap->bind(0);
+
+        if(isNormal) normalMap->bind(1);
+        if(isAmbient) ambientMap->bind(2);
+        if(isSpecular) specularMap->bind(3);
+    }
 
     /* Render */
     p.bind();
@@ -57,12 +63,20 @@ void ModelLoader::render(QMatrix4x4 MVMat, QMatrix4x4 ProjMat, QVector3D eyePos,
     p.setUniformValue("lightPosition", lightPos);
     p.setUniformValue("diffuse", 0);
     p.setUniformValue("normalMap", 1);
+    p.setUniformValue("aoMap", 2);
+    p.setUniformValue("specularMap", 3);
+
+    p.setUniformValue("isNormal", isNormal);
+    p.setUniformValue("isAmbient", isAmbient);
+    p.setUniformValue("isSpecular", isSpecular);
+
     model.render();
     p.release();
 }
 
 void ModelLoader::setDiffuseMap(QString path)
 {
+    isDiffuse = true;
     diffuseMap = new QOpenGLTexture(QImage(path));
     diffuseMap->setMinificationFilter(QOpenGLTexture::Linear);
     diffuseMap->setMagnificationFilter(QOpenGLTexture::Linear);
@@ -70,16 +84,19 @@ void ModelLoader::setDiffuseMap(QString path)
 
 void ModelLoader::setNormalMap(QString path)
 {
+    isNormal = true;
     normalMap = new QOpenGLTexture(QImage(path));
 }
 
 void ModelLoader::setAmbientMap(QString path)
 {
+    isAmbient = true;
     ambientMap = new QOpenGLTexture(QImage(path));
 }
 
 void ModelLoader::setSpecularMap(QString path)
 {
+    isSpecular = true;
     specularMap = new QOpenGLTexture(QImage(path));
 }
 
