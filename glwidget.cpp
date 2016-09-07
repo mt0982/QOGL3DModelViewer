@@ -60,14 +60,17 @@ void GLWidget::paintGL()
     }
 
     if(!menu->normalPath.isEmpty()) {
+        if(menu->normalPath != modelLoader.normalPath) modelLoader.isNormal = false;
         modelLoader.setNormalMap(menu->normalPath);
     }
 
     if(!menu->ambientPath.isEmpty()) {
+        if(menu->ambientPath != modelLoader.ambientPath) modelLoader.isAmbient = false;
         modelLoader.setAmbientMap(menu->ambientPath);
     }
 
     if(!menu->specularPath.isEmpty()) {
+        if(menu->specularPath != modelLoader.specularPath) modelLoader.isSpecular = false;
         modelLoader.setSpecularMap(menu->specularPath);
     }
 

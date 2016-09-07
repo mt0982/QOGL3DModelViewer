@@ -119,6 +119,7 @@ void ModelLoader::setNormalMap(QString path)
     if(!isNormal) {
         isNormal = true;
         normalMap = new QOpenGLTexture(QImage(path));
+        normalPath = path;
     }
 }
 
@@ -127,6 +128,7 @@ void ModelLoader::setAmbientMap(QString path)
     if(!isAmbient) {
         isAmbient = true;
         ambientMap = new QOpenGLTexture(QImage(path));
+        ambientPath = path;
     }
 }
 
@@ -135,6 +137,7 @@ void ModelLoader::setSpecularMap(QString path)
     if(!isSpecular) {
         isSpecular = true;
         specularMap = new QOpenGLTexture(QImage(path));
+        specularPath = path;
     }
 }
 
