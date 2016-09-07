@@ -34,11 +34,8 @@ private slots:
     void on_dial_sliderMoved(int position);
     void on_buttonDiffuseMap_clicked();
     void on_buttonFile_clicked();
-
     void on_buttonNormalMap_clicked();
-
     void on_buttonAmbientMap_clicked();
-
     void on_buttonSpecularMap_clicked();
 
 private:

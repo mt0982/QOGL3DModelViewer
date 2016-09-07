@@ -89,9 +89,9 @@ void ModelLoader::render(QMatrix4x4 MVMat, QMatrix4x4 ProjMat, QVector3D eyePos,
         p.setUniformValue("ProjMat", ProjMat);
         p.setUniformValue("cameraPosition", eyePos);
         p.setUniformValue("lightPosition", lightPos);
-        p.setUniformValue("diffuse", 0);
+        p.setUniformValue("diffuseMap", 0);
         p.setUniformValue("normalMap", 1);
-        p.setUniformValue("aoMap", 2);
+        p.setUniformValue("ambientMap", 2);
         p.setUniformValue("specularMap", 3);
 
         p.setUniformValue("isNormal", isNormal);
