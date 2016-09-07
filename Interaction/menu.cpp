@@ -25,7 +25,6 @@ void Menu::on_dial_sliderMoved(int position)
 {
     /* Set Angle */
     angle = position;
-    qDebug() << angle;
 }
 
 int Menu::getAngle() const
@@ -37,7 +36,7 @@ int Menu::getAngle() const
 void Menu::on_buttonFile_clicked()
 {
     /* Open OBJ File */
-    QString filename = QFileDialog::getOpenFileName(this, "Open a File", "", "Model (*.obj)");
+    QString filename = QFileDialog::getOpenFileName(this, "Open a File", "/home/asus/Pulpit", "Model (*.obj)");
     modelPath = filename;
 
     /* File Name */

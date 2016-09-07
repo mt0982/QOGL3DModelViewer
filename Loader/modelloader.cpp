@@ -105,28 +105,37 @@ void ModelLoader::render(QMatrix4x4 MVMat, QMatrix4x4 ProjMat, QVector3D eyePos,
 
 void ModelLoader::setDiffuseMap(QString path)
 {
-    isDiffuse = true;
-    diffuseMap = new QOpenGLTexture(QImage(path));
-    diffuseMap->setMinificationFilter(QOpenGLTexture::Linear);
-    diffuseMap->setMagnificationFilter(QOpenGLTexture::Linear);
+    if(!isDiffuse) {
+        isDiffuse = true;
+        diffuseMap = new QOpenGLTexture(QImage(path));
+        diffuseMap->setMinificationFilter(QOpenGLTexture::Linear);
+        diffuseMap->setMagnificationFilter(QOpenGLTexture::Linear);
+        diffusePath = path;
+    }
 }
 
 void ModelLoader::setNormalMap(QString path)
 {
-    isNormal = true;
-    normalMap = new QOpenGLTexture(QImage(path));
+    if(!isNormal) {
+        isNormal = true;
+        normalMap = new QOpenGLTexture(QImage(path));
+    }
 }
 
 void ModelLoader::setAmbientMap(QString path)
 {
-    isAmbient = true;
-    ambientMap = new QOpenGLTexture(QImage(path));
+    if(!isAmbient) {
+        isAmbient = true;
+        ambientMap = new QOpenGLTexture(QImage(path));
+    }
 }
 
 void ModelLoader::setSpecularMap(QString path)
 {
-    isSpecular = true;
-    specularMap = new QOpenGLTexture(QImage(path));
+    if(!isSpecular) {
+        isSpecular = true;
+        specularMap = new QOpenGLTexture(QImage(path));
+    }
 }
 
 void ModelLoader::setFilePath(QString path, bool flag, QOpenGLShaderProgram &program)

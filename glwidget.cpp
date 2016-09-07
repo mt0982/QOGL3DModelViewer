@@ -30,12 +30,6 @@ void GLWidget::initializeGL()
 
     /* Init Model Loader */
     modelLoader.init(program);
-
-    /* Texture */
-    modelLoader.setDiffuseMap("/home/asus/Programy/Qt/Projekty/QOGL3DModelViewer/Example/Imrod/Imrod_Diffuse.jpg");
-    modelLoader.setNormalMap("/home/asus/Programy/Qt/Projekty/QOGL3DModelViewer/Example/Imrod/Imrod Normal.jpg");
-    modelLoader.setAmbientMap("/home/asus/Programy/Qt/Projekty/QOGL3DModelViewer/Example/Imrod/Imrod_Ambient.jpg");
-    modelLoader.setSpecularMap("/home/asus/Programy/Qt/Projekty/QOGL3DModelViewer/Example/Imrod/Imrod_Specular.jpg");
 }
 
 void GLWidget::paintGL()
@@ -61,8 +55,20 @@ void GLWidget::paintGL()
 
     /* Set Textures */
     if(!menu->diffusePath.isEmpty()) {
+        if(menu->diffusePath != modelLoader.diffusePath) modelLoader.isDiffuse = false;
         modelLoader.setDiffuseMap(menu->diffusePath);
-        menu->diffusePath = "";
+    }
+
+    if(!menu->normalPath.isEmpty()) {
+        modelLoader.setNormalMap(menu->normalPath);
+    }
+
+    if(!menu->ambientPath.isEmpty()) {
+        modelLoader.setAmbientMap(menu->ambientPath);
+    }
+
+    if(!menu->specularPath.isEmpty()) {
+        modelLoader.setSpecularMap(menu->specularPath);
     }
 
     /* Render Object */

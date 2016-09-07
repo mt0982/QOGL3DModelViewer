@@ -17,11 +17,6 @@ private:
     QOpenGLTexture *specularMap;
     QString modelPath;
 
-    bool isDiffuse;
-    bool isNormal;
-    bool isAmbient;
-    bool isSpecular;
-
     QString path;
 
 public:
@@ -35,6 +30,17 @@ public:
     void setAmbientMap(QString path);
     void setSpecularMap(QString path);
     void setFilePath(QString path, bool flag, QOpenGLShaderProgram &program);
+
+    /* Public Variable */
+    bool isDiffuse;
+    bool isNormal;
+    bool isAmbient;
+    bool isSpecular;
+
+    QString diffusePath;
+    QString normalPath;
+    QString ambientPath;
+    QString specularPath;
 };
 
 #endif // MODELLOADER_H
