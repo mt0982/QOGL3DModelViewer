@@ -51,6 +51,15 @@ void GLWidget::paintGL()
     float z = sin(angle * 3.141592 / 180.0) * radius;
     lightPosition = QVector3D(x, 1, z);
 
+    /* Set File Path */
+    qDebug() << menu->getModelPath();
+    if(!menu->getModelPath().isEmpty()) {
+        modelLoader.setFilePath(menu->getModelPath(), true, program);
+        menu->setModelPath("");
+    } else {
+        modelLoader.setFilePath(menu->getModelPath(), false, program);
+    }
+
     /* Render Object */
     modelLoader.render(MVMat, ProjMat, camera.getPosition(), lightPosition, program);
 }

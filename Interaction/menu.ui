@@ -34,7 +34,7 @@
      <property name="spacing">
       <number>0</number>
      </property>
-     <item row="4" column="0">
+     <item row="5" column="0">
       <widget class="QDial" name="dial">
        <property name="maximum">
         <number>360</number>
@@ -53,35 +53,45 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="labelNormalMap">
-       <property name="text">
-        <string>Normal Map:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
+     <item row="2" column="2">
       <widget class="QToolButton" name="buttonNormalMap">
        <property name="text">
         <string>...</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="labelDiffuseMap">
+     <item row="3" column="0" colspan="2">
+      <widget class="QLabel" name="labelAmbientMap">
        <property name="text">
-        <string>Diffuse Map:</string>
+        <string>Ambient Map:</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="2">
+     <item row="5" column="1" colspan="2">
+      <widget class="QLCDNumber" name="lcdNumber"/>
+     </item>
+     <item row="2" column="0" colspan="2">
+      <widget class="QLabel" name="labelNormalMap">
+       <property name="text">
+        <string>Normal Map:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0" colspan="2">
+      <widget class="QLabel" name="labelSpecularMap">
+       <property name="text">
+        <string>Specular Map:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="2">
       <widget class="QToolButton" name="buttonAmbientMap">
        <property name="text">
         <string>...</string>
        </property>
       </widget>
      </item>
-     <item row="5" column="0">
+     <item row="6" column="0">
       <spacer name="verticalSpacer">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
@@ -94,36 +104,40 @@
        </property>
       </spacer>
      </item>
-     <item row="0" column="2">
+     <item row="1" column="2">
       <widget class="QToolButton" name="buttonDiffuseMap">
        <property name="text">
         <string>...</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="labelSpecularMap">
-       <property name="text">
-        <string>Specular Map:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="2">
+     <item row="4" column="2">
       <widget class="QToolButton" name="buttonSpecularMap">
        <property name="text">
         <string>...</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="labelAmbientMap">
+     <item row="1" column="0" colspan="2">
+      <widget class="QLabel" name="labelDiffuseMap">
        <property name="text">
-        <string>Ambient Map:</string>
+        <string>Diffuse Map:</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="1" colspan="2">
-      <widget class="QLCDNumber" name="lcdNumber"/>
+     <item row="0" column="2">
+      <widget class="QToolButton" name="buttonFile">
+       <property name="text">
+        <string>...</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0" colspan="2">
+      <widget class="QLabel" name="labelFile">
+       <property name="text">
+        <string>Model File (*.obj):</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

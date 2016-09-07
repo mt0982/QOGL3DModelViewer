@@ -9,8 +9,8 @@ void Mesh::init()
 {
     initializeOpenGLFunctions();
 
-    vao.create();   //Vertex Array Object
-    ibo.create();   //Index Buffer
+    if(!vao.isCreated()) vao.create();   //Vertex Array Object
+    if(!ibo.isCreated()) ibo.create();   //Index Buffer
 
     ibo.setUsagePattern(QOpenGLBuffer::StaticDraw);
 }

@@ -22,6 +22,8 @@ private:
     bool isAmbient;
     bool isSpecular;
 
+    QString path;
+
 public:
     ModelLoader();
     void init(QOpenGLShaderProgram &program);
@@ -32,6 +34,25 @@ public:
     void setNormalMap(QString path);
     void setAmbientMap(QString path);
     void setSpecularMap(QString path);
+    void setFilePath(QString path, bool flag, QOpenGLShaderProgram &program);
 };
 
 #endif // MODELLOADER_H
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

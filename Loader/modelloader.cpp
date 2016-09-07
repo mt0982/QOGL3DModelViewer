@@ -2,99 +2,105 @@
 
 ModelLoader::ModelLoader(): isDiffuse(false), isNormal(false), isAmbient(false), isSpecular(false)
 {
-
+    //path = "/home/asus/Programy/Qt/Projekty/QOGL3DModelViewer/Example/Imrod/ImrodLowPoly.obj";
 }
 
 void ModelLoader::init(QOpenGLShaderProgram &program)
 {
-    /* Attribute */
-    QVector<QVector3D> vertices;
-    QVector<QVector3D> normals;
-    QVector<QVector3D> colors;
-    QVector<QVector3D> tangents;
-    QVector<QVector2D> UV;
-    QVector<uint> indices;
+    /* If Path Isn't Empty */
+    if(!path.isEmpty()) {
 
-    /* Load Object */
-    QString modelPath = "/home/asus/Programy/Qt/Projekty/QOGL3DModelViewer/Example/Imrod/ImrodLowPoly.obj";
-    QVector<Vertex> vertex = loadOBJ(modelPath, vertices, indices, UV, normals);
+        /* Attribute */
+        QVector<QVector3D> vertices;
+        QVector<QVector3D> normals;
+        QVector<QVector3D> colors;
+        QVector<QVector3D> tangents;
+        QVector<QVector2D> UV;
+        QVector<uint> indices;
 
-    /* Info */
-    qDebug() << "Parts:" << vertex.size();
-    qDebug() << "Vertices:" << vertex[0].vertices.size();
-    qDebug() << "Indices:" << vertex[0].indices.size();
-    qDebug() << "Normals:" << vertex[0].normals.size();
-    qDebug() << "UVs:" << vertex[0].UV.size();
+        /* Load Object */
+        QVector<Vertex> vertex = loadOBJ(path, vertices, indices, UV, normals);
 
-    /* Colors */
-    float minimum = 999999;
-    for(int i = 0; i < vertices.size(); i++) {
-        colors.push_back(QVector3D(0.3, 0.4, 0.35));
-        minimum = qMin(minimum, vertices[i].y());
-    }
+        /* Info */
+        qDebug() << "Parts:" << vertex.size();
+        qDebug() << "Vertices:" << vertex[0].vertices.size();
+        qDebug() << "Indices:" << vertex[0].indices.size();
+        qDebug() << "Normals:" << vertex[0].normals.size();
+        qDebug() << "UVs:" << vertex[0].UV.size();
 
-    /* Set Object Y = 0 */
-    float maximum = -999999;
-    if(minimum > 0) {
+        /* Colors */
+        float minimum = 999999;
         for(int i = 0; i < vertices.size(); i++) {
-            vertices[i][1] -= minimum;
-            maximum = qMax(maximum, vertices[i].y());
+            colors.push_back(QVector3D(0.3, 0.4, 0.35));
+            minimum = qMin(minimum, vertices[i].y());
         }
-    } else if(minimum < 0) {
+
+        /* Set Object Y = 0 */
+        float maximum = -999999;
+        if(minimum > 0) {
+            for(int i = 0; i < vertices.size(); i++) {
+                vertices[i][1] -= minimum;
+                maximum = qMax(maximum, vertices[i].y());
+            }
+        } else if(minimum < 0) {
+            for(int i = 0; i < vertices.size(); i++) {
+                vertices[i][1] += minimum;
+                maximum = qMax(maximum, vertices[i].y());
+            }
+        }
+
+        /* Scale Object To [0,1] */
         for(int i = 0; i < vertices.size(); i++) {
-            vertices[i][1] += minimum;
-            maximum = qMax(maximum, vertices[i].y());
+            vertices[i] /= maximum;
         }
+
+        qDebug() << maximum;
+
+        /* Tangents */
+        model.calculateTangents(vertices, indices, UV, tangents);
+
+        /* Set Attribute */
+        model.init();
+        model.setAttribute(0, vertices, program);
+        model.setAttribute(1, colors, program);
+        model.setAttribute(2, normals, program);
+        model.setAttribute(3, UV, program);
+        model.setAttribute(4, tangents, program);
+        model.setIndices(indices);
     }
-
-    /* Scale Object To [0,1] */
-    for(int i = 0; i < vertices.size(); i++) {
-        vertices[i] /= maximum;
-    }
-
-    qDebug() << maximum;
-
-    /* Tangents */
-    model.calculateTangents(vertices, indices, UV, tangents);
-
-    /* Set Attribute */
-    model.init();
-    model.setAttribute(0, vertices, program);
-    model.setAttribute(1, colors, program);
-    model.setAttribute(2, normals, program);
-    model.setAttribute(3, UV, program);
-    model.setAttribute(4, tangents, program);
-    model.setIndices(indices);
 }
 
 void ModelLoader::render(QMatrix4x4 MVMat, QMatrix4x4 ProjMat, QVector3D eyePos, QVector3D lightPos, QOpenGLShaderProgram &p)
 {
-    /* Check Texture */
-    if(isDiffuse) {
-        diffuseMap->bind(0);
+    if(!path.isEmpty()) {
 
-        if(isNormal) normalMap->bind(1);
-        if(isAmbient) ambientMap->bind(2);
-        if(isSpecular) specularMap->bind(3);
+        /* Check Texture */
+        if(isDiffuse) {
+            diffuseMap->bind(0);
+
+            if(isNormal) normalMap->bind(1);
+            if(isAmbient) ambientMap->bind(2);
+            if(isSpecular) specularMap->bind(3);
+        }
+
+        /* Render */
+        p.bind();
+        p.setUniformValue("MVMat", MVMat);
+        p.setUniformValue("ProjMat", ProjMat);
+        p.setUniformValue("cameraPosition", eyePos);
+        p.setUniformValue("lightPosition", lightPos);
+        p.setUniformValue("diffuse", 0);
+        p.setUniformValue("normalMap", 1);
+        p.setUniformValue("aoMap", 2);
+        p.setUniformValue("specularMap", 3);
+
+        p.setUniformValue("isNormal", isNormal);
+        p.setUniformValue("isAmbient", isAmbient);
+        p.setUniformValue("isSpecular", isSpecular);
+
+        model.render();
+        p.release();
     }
-
-    /* Render */
-    p.bind();
-    p.setUniformValue("MVMat", MVMat);
-    p.setUniformValue("ProjMat", ProjMat);
-    p.setUniformValue("cameraPosition", eyePos);
-    p.setUniformValue("lightPosition", lightPos);
-    p.setUniformValue("diffuse", 0);
-    p.setUniformValue("normalMap", 1);
-    p.setUniformValue("aoMap", 2);
-    p.setUniformValue("specularMap", 3);
-
-    p.setUniformValue("isNormal", isNormal);
-    p.setUniformValue("isAmbient", isAmbient);
-    p.setUniformValue("isSpecular", isSpecular);
-
-    model.render();
-    p.release();
 }
 
 void ModelLoader::setDiffuseMap(QString path)
@@ -121,6 +127,14 @@ void ModelLoader::setSpecularMap(QString path)
 {
     isSpecular = true;
     specularMap = new QOpenGLTexture(QImage(path));
+}
+
+void ModelLoader::setFilePath(QString path, bool flag, QOpenGLShaderProgram &program)
+{
+    if(flag) {
+        this->path = path;
+        init(program);
+    }
 }
 
 
