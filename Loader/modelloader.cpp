@@ -16,7 +16,8 @@ void ModelLoader::init(QOpenGLShaderProgram &program)
     QVector<uint> indices;
 
     /* Load Object */
-    QVector<Vertex> vertex = loadOBJ("/home/asus/Programy/Qt/Projekty/QGLScreenLock/Object/Imrod/ImrodLowPoly.obj", vertices, indices, UV, normals);
+    QString modelPath = "/home/asus/Programy/Qt/Projekty/QOGL3DModelViewer/Example/Imrod/ImrodLowPoly.obj";
+    QVector<Vertex> vertex = loadOBJ(modelPath, vertices, indices, UV, normals);
 
     /* Info */
     qDebug() << "Parts:" << vertex.size();
@@ -26,10 +27,32 @@ void ModelLoader::init(QOpenGLShaderProgram &program)
     qDebug() << "UVs:" << vertex[0].UV.size();
 
     /* Colors */
+    float minimum = 999999;
     for(int i = 0; i < vertices.size(); i++) {
         colors.push_back(QVector3D(0.3, 0.4, 0.35));
-        vertices[i] /= 50;
+        minimum = qMin(minimum, vertices[i].y());
     }
+
+    /* Set Object Y = 0 */
+    float maximum = -999999;
+    if(minimum > 0) {
+        for(int i = 0; i < vertices.size(); i++) {
+            vertices[i][1] -= minimum;
+            maximum = qMax(maximum, vertices[i].y());
+        }
+    } else if(minimum < 0) {
+        for(int i = 0; i < vertices.size(); i++) {
+            vertices[i][1] += minimum;
+            maximum = qMax(maximum, vertices[i].y());
+        }
+    }
+
+    /* Scale Object To [0,1] */
+    for(int i = 0; i < vertices.size(); i++) {
+        vertices[i] /= maximum;
+    }
+
+    qDebug() << maximum;
 
     /* Tangents */
     model.calculateTangents(vertices, indices, UV, tangents);

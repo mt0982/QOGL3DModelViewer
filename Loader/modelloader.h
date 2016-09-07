@@ -15,6 +15,7 @@ private:
     QOpenGLTexture *normalMap;
     QOpenGLTexture *ambientMap;
     QOpenGLTexture *specularMap;
+    QString modelPath;
 
     bool isDiffuse;
     bool isNormal;

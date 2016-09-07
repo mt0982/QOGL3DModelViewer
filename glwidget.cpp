@@ -27,10 +27,10 @@ void GLWidget::initializeGL()
     modelLoader.init(program);
 
     /* Texture */
-    modelLoader.setDiffuseMap("/home/asus/Programy/Qt/Projekty/QGLScreenLock/Object/Imrod/Imrod_Diffuse.jpg");
-    modelLoader.setNormalMap("/home/asus/Programy/Qt/Projekty/QGLScreenLock/Object/Imrod/Imrod_norm.jpg");
-    modelLoader.setAmbientMap("/home/asus/Programy/Qt/Projekty/QGLScreenLock/Object/Imrod/Imrod_Illumination.jpg");
-    modelLoader.setSpecularMap("/home/asus/Programy/Qt/Projekty/QGLScreenLock/Object/Imrod/Imrod_spec.jpg");
+    modelLoader.setDiffuseMap("/home/asus/Programy/Qt/Projekty/QOGL3DModelViewer/Example/Imrod/Imrod_Diffuse.jpg");
+    modelLoader.setNormalMap("/home/asus/Programy/Qt/Projekty/QOGL3DModelViewer/Example/Imrod/Imrod Normal.jpg");
+    modelLoader.setAmbientMap("/home/asus/Programy/Qt/Projekty/QOGL3DModelViewer/Example/Imrod/Imrod_Ambient.jpg");
+    modelLoader.setSpecularMap("/home/asus/Programy/Qt/Projekty/QOGL3DModelViewer/Example/Imrod/Imrod_Specular.jpg");
 }
 
 void GLWidget::paintGL()
