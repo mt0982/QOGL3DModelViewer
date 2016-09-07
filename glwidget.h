@@ -18,6 +18,7 @@
 #include <QTimer>
 #include <mesh.h>
 #include <Interaction/camera.h>
+#include <Interaction/menu.h>
 #include <Loader/modelloader.h>
 
 class GLWidget: public QOpenGLWidget, protected QOpenGLFunctions_4_5_Core
@@ -34,9 +35,15 @@ private:
     QOpenGLShaderProgram program;
     ModelLoader modelLoader;
 
+    QVector3D lightPosition;
+
+    Menu *menu;
+
 public:
     explicit GLWidget(QWidget *parent = 0);
     ~GLWidget();
+
+    void setLightPosition(const QVector3D &value);
 
 protected:
     void initializeGL();

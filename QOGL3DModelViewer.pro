@@ -16,14 +16,16 @@ SOURCES += main.cpp \
     mesh.cpp \
     Interaction/camera.cpp \
     Loader/modelloader.cpp \
-    Loader/parser.cpp
+    Loader/parser.cpp \
+    Interaction/menu.cpp
 
 HEADERS += \
     glwidget.h \
     mesh.h \
     Interaction/camera.h \
     Loader/modelloader.h \
-    Loader/parser.h
+    Loader/parser.h \
+    Interaction/menu.h
 
 DISTFILES += \
     Shader/program.frag \
@@ -31,3 +33,6 @@ DISTFILES += \
 
 RESOURCES += \
     resource.qrc
+
+FORMS += \
+    Interaction/menu.ui

@@ -5,6 +5,11 @@ GLWidget::GLWidget(QWidget *parent): QOpenGLWidget(parent)
     connect(&timer, SIGNAL(timeout()), this, SLOT(redraw()));
     timer.start(1.0f);
     time.start();
+    lightPosition = QVector3D(0, 2, 1);
+    //menu = new Menu;
+
+    menu = new Menu;
+    menu->show();
 }
 
 GLWidget::~GLWidget()
@@ -39,7 +44,7 @@ void GLWidget::paintGL()
 
     MVMat = camera.getWorldToViewMatrix();
 
-    modelLoader.render(MVMat, ProjMat, camera.getPosition(), QVector3D(0, 2, 1), program);
+    modelLoader.render(MVMat, ProjMat, camera.getPosition(), lightPosition, program);
 }
 
 void GLWidget::resizeGL(int w, int h)
@@ -90,6 +95,10 @@ void GLWidget::redraw()
     fps++;
 }
 
+void GLWidget::setLightPosition(const QVector3D &value)
+{
+    lightPosition = value;
+}
 
 
 
