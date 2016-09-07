@@ -43,8 +43,6 @@ public:
     explicit GLWidget(QWidget *parent = 0);
     ~GLWidget();
 
-    void setLightPosition(const QVector3D &value);
-
 protected:
     void initializeGL();
     void paintGL();

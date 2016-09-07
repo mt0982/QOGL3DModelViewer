@@ -6,8 +6,8 @@ GLWidget::GLWidget(QWidget *parent): QOpenGLWidget(parent)
     timer.start(1.0f);
     time.start();
     lightPosition = QVector3D(0, 2, 1);
-    //menu = new Menu;
 
+    /* Show Menu */
     menu = new Menu;
     menu->show();
 }
@@ -44,6 +44,14 @@ void GLWidget::paintGL()
 
     MVMat = camera.getWorldToViewMatrix();
 
+    /* Light Parameters */
+    float angle = menu->getAngle();
+    float radius = 2;
+    float x = cos(angle * 3.141592 / 180.0) * radius;
+    float z = sin(angle * 3.141592 / 180.0) * radius;
+    lightPosition = QVector3D(x, 1, z);
+
+    /* Render Object */
     modelLoader.render(MVMat, ProjMat, camera.getPosition(), lightPosition, program);
 }
 
@@ -52,6 +60,8 @@ void GLWidget::resizeGL(int w, int h)
     glViewport(0, 0, w, h);
     ProjMat.setToIdentity();
     ProjMat.perspective(60, (float)w/h, 0.01f, 100.0f);
+
+    menu->setWindowPosition(w,h);
 }
 
 void GLWidget::mouseMoveEvent(QMouseEvent *e)
@@ -95,10 +105,7 @@ void GLWidget::redraw()
     fps++;
 }
 
-void GLWidget::setLightPosition(const QVector3D &value)
-{
-    lightPosition = value;
-}
+
 
 
 
