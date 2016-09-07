@@ -28,7 +28,9 @@ void GLWidget::initializeGL()
 
     /* Texture */
     diffuseMap = new QOpenGLTexture
-            (QImage("/home/asus/Programy/Qt/Projekty/QGLScreenLock/Object/Dwarf/textures/dwarf_2_1K_color.jpg"));
+            (QImage("/home/asus/Programy/Qt/Projekty/QGLScreenLock/Object/Imrod/Imrod_Diffuse.jpg"));
+    normalMap = new QOpenGLTexture
+            (QImage("/home/asus/Programy/Qt/Projekty/QGLScreenLock/Object/Imrod/Imrod_norm.jpg"));
 }
 
 void GLWidget::paintGL()
@@ -38,6 +40,7 @@ void GLWidget::paintGL()
     MVMat = camera.getWorldToViewMatrix();
 
     diffuseMap->bind(0);
+    normalMap->bind(1);
 
     program.bind();
     program.setUniformValue("MVMat", MVMat);
@@ -45,6 +48,7 @@ void GLWidget::paintGL()
     program.setUniformValue("cameraPosition", camera.getPosition());
     program.setUniformValue("lightPosition", QVector3D(0, 2, 1));
     program.setUniformValue("diffuse", 0);
+    program.setUniformValue("normalMap", 1);
     modelLoader.render();
     program.release();
 }
