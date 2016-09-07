@@ -5,8 +5,9 @@
 #include <QVector3D>
 #include <QVector2D>
 #include <QOpenGLShaderProgram>
+#include <Loader/parser.h>
 
-class ModelLoader {
+class ModelLoader: public Parser {
 private:
     Mesh model;
 
