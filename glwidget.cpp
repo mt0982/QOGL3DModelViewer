@@ -128,6 +128,11 @@ void GLWidget::redraw()
     fps++;
 }
 
+void GLWidget::closeEvent(QCloseEvent *)
+{
+    menu->close();
+}
+
 
 
 

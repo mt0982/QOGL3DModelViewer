@@ -49,6 +49,7 @@ protected:
     void resizeGL(int w, int h);
     void mouseMoveEvent(QMouseEvent *e);
     void keyPressEvent(QKeyEvent *e);
+    void closeEvent(QCloseEvent *);
 
 private slots:
     void redraw();
