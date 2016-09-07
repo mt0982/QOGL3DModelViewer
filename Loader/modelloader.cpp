@@ -28,6 +28,7 @@ void ModelLoader::init(QOpenGLShaderProgram &program)
     model.setAttribute(0, vertices, program);
     model.setAttribute(1, colors, program);
     model.setAttribute(2, normals, program);
+    model.setAttribute(3, UV, program);
     model.setIndices(indices);
 }
 

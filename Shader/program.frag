@@ -2,19 +2,19 @@
 
 in vec3 baseColor;
 in vec3 fragPosition;
+in vec2 UV;
 in vec3 N;
 
 uniform vec3 cameraPosition;
 uniform vec3 lightPosition;
+uniform sampler2D diffuseMap;
 
 out vec4 outColor;
 
 void main(void)
 {
-    //outColor = vec4(baseColor, 1.0);
-
     /* Color */
-    vec3 color = baseColor;
+    vec3 color = texture2D(diffuseMap, UV).xyz; //baseColor;
 
     /* Normals */
     vec3 normal = N;
