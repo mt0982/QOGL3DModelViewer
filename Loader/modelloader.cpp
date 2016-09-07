@@ -17,6 +17,9 @@ void ModelLoader::init(QOpenGLShaderProgram &program)
 
     /* Load Object */
     QVector<Vertex> vertex = loadOBJ("/home/asus/Programy/Qt/Projekty/QGLScreenLock/Object/Imrod/ImrodLowPoly.obj", vertices, indices, UV, normals);
+
+    /* Info */
+    qDebug() << "Parts:" << vertex.size();
     qDebug() << "Vertices:" << vertex[0].vertices.size();
     qDebug() << "Indices:" << vertex[0].indices.size();
     qDebug() << "Normals:" << vertex[0].normals.size();
@@ -41,9 +44,43 @@ void ModelLoader::init(QOpenGLShaderProgram &program)
     model.setIndices(indices);
 }
 
-void ModelLoader::render()
+void ModelLoader::render(QMatrix4x4 MVMat, QMatrix4x4 ProjMat, QVector3D eyePos, QVector3D lightPos, QOpenGLShaderProgram &p)
 {
+    diffuseMap->bind(0);
+    normalMap->bind(1);
+
+    /* Render */
+    p.bind();
+    p.setUniformValue("MVMat", MVMat);
+    p.setUniformValue("ProjMat", ProjMat);
+    p.setUniformValue("cameraPosition", eyePos);
+    p.setUniformValue("lightPosition", lightPos);
+    p.setUniformValue("diffuse", 0);
+    p.setUniformValue("normalMap", 1);
     model.render();
+    p.release();
+}
+
+void ModelLoader::setDiffuseMap(QString path)
+{
+    diffuseMap = new QOpenGLTexture(QImage(path));
+    diffuseMap->setMinificationFilter(QOpenGLTexture::Linear);
+    diffuseMap->setMagnificationFilter(QOpenGLTexture::Linear);
+}
+
+void ModelLoader::setNormalMap(QString path)
+{
+    normalMap = new QOpenGLTexture(QImage(path));
+}
+
+void ModelLoader::setAmbientMap(QString path)
+{
+    ambientMap = new QOpenGLTexture(QImage(path));
+}
+
+void ModelLoader::setSpecularMap(QString path)
+{
+    specularMap = new QOpenGLTexture(QImage(path));
 }
 
 

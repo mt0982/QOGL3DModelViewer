@@ -5,16 +5,27 @@
 #include <QVector3D>
 #include <QVector2D>
 #include <QOpenGLShaderProgram>
+#include <QOpenGLTexture>
 #include <Loader/parser.h>
 
 class ModelLoader: public Parser {
 private:
     Mesh model;
+    QOpenGLTexture *diffuseMap;
+    QOpenGLTexture *normalMap;
+    QOpenGLTexture *ambientMap;
+    QOpenGLTexture *specularMap;
 
 public:
     ModelLoader();
     void init(QOpenGLShaderProgram &program);
-    void render();
+    void render(QMatrix4x4 MVMat, QMatrix4x4 ProjMat, QVector3D eyePos, QVector3D lightPos, QOpenGLShaderProgram &p);
+
+    /* Setters */
+    void setDiffuseMap(QString path);
+    void setNormalMap(QString path);
+    void setAmbientMap(QString path);
+    void setSpecularMap(QString path);
 };
 
 #endif // MODELLOADER_H

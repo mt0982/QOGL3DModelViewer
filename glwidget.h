@@ -32,11 +32,6 @@ private:
     int fps;
 
     QOpenGLShaderProgram program;
-    QOpenGLTexture *diffuseMap;
-    QOpenGLTexture *normalMap;
-    QOpenGLTexture *ambientMap;
-    QOpenGLTexture *specularMap;
-
     ModelLoader modelLoader;
 
 public:
