@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QDebug>
 #include <QFileDialog>
+#include <QStyleFactory>
 
 namespace Ui {
 class Menu;

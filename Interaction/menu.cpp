@@ -6,6 +6,7 @@ Menu::Menu(QWidget *parent): QWidget(parent), ui(new Ui::Menu)
     ui->setupUi(this);
 
     setWindowTitle("Menu");
+    QApplication::setStyle(QStyleFactory::create("Fusion"));
     setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint);
     setFixedWidth(230);
     angle = 0;
@@ -99,6 +100,12 @@ void Menu::on_buttonSpecularMap_clicked()
     QFileInfo file(filename);
     ui->labelSpecularMap->setText("Specular Map: " + file.baseName().toLatin1());
 }
+
+
+
+
+
+
 
 
 
