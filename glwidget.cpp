@@ -43,7 +43,8 @@ void GLWidget::paintGL()
     float radius = 2;
     float x = cos(angle * 3.141592 / 180.0) * radius;
     float z = sin(angle * 3.141592 / 180.0) * radius;
-    lightPosition = QVector3D(x, 1, z);
+    float y = menu->getRadius();
+    lightPosition = QVector3D(x, y, z);
 
     /* Set File Path */
     if(!menu->getModelPath().isEmpty()) {

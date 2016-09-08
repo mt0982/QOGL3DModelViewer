@@ -10,6 +10,7 @@ Menu::Menu(QWidget *parent): QWidget(parent), ui(new Ui::Menu)
     setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint);
     setFixedWidth(230);
     angle = 0;
+    radius = 1.0;
 }
 
 Menu::~Menu()
@@ -101,6 +102,17 @@ void Menu::on_buttonSpecularMap_clicked()
     ui->labelSpecularMap->setText("Specular Map: " + file.baseName().toLatin1());
 }
 
+void Menu::on_horizontalSlider_valueChanged(int value)
+{
+    /* Set Light Distance */
+    radius = value / 100.0;
+    ui->lcdNumber_2->display(radius);
+}
+
+float Menu::getRadius() const
+{
+    return radius;
+}
 
 
 

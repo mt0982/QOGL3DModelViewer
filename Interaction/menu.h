@@ -23,6 +23,7 @@ public:
 
     /* Getters */
     int getAngle() const;
+    float getRadius() const;
     QString getModelPath();
 
     /* Public Variable */
@@ -38,11 +39,13 @@ private slots:
     void on_buttonNormalMap_clicked();
     void on_buttonAmbientMap_clicked();
     void on_buttonSpecularMap_clicked();
+    void on_horizontalSlider_valueChanged(int value);
 
 private:
     Ui::Menu *ui;
     int angle;
     QString modelPath;
+    float radius;
 };
 
 #endif // MENU_H
