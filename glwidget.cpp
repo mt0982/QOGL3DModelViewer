@@ -83,8 +83,6 @@ void GLWidget::resizeGL(int w, int h)
     glViewport(0, 0, w, h);
     ProjMat.setToIdentity();
     ProjMat.perspective(60, (float)w/h, 0.01f, 100.0f);
-
-    menu->setWindowPosition(w,h);
 }
 
 void GLWidget::mouseMoveEvent(QMouseEvent *e)

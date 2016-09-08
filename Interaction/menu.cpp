@@ -7,6 +7,7 @@ Menu::Menu(QWidget *parent): QWidget(parent), ui(new Ui::Menu)
 
     setWindowTitle("Menu");
     setWindowFlags(Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint);
+    setFixedWidth(230);
     angle = 0;
 }
 
@@ -15,11 +16,10 @@ Menu::~Menu()
     delete ui;
 }
 
-void Menu::setWindowPosition(int w, int h)
+void Menu::setWindowPosition(int x, int y, int h)
 {
     /* Set Window Size */
-    setFixedSize(230, h);
-    if(isActiveWindow()) setWindowPosition(33, 33);
+    //setGeometry(x - 230, y + 20, 230, h);
 }
 
 void Menu::on_dial_sliderMoved(int position)

@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>Shader/program.frag</file>
         <file>Shader/program.vert</file>
+        <file>Icon/Rotate.png</file>
+        <file>Icon/Add.png</file>
     </qresource>
 </RCC>

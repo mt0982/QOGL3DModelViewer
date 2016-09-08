@@ -17,7 +17,7 @@ public:
     ~Menu();
 
     /* Setters */
-    void setWindowPosition(int w, int h);
+    void setWindowPosition(int x, int y, int h);
     void setModelPath(const QString &value);
 
     /* Getters */
