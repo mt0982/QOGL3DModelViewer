@@ -38,7 +38,7 @@ int Menu::getAngle() const
 void Menu::on_buttonFile_clicked()
 {
     /* Open OBJ File */
-    QString filename = QFileDialog::getOpenFileName(this, "Open a File", "/home/asus/Pulpit", "Model (*.obj)");
+    QString filename = QFileDialog::getOpenFileName(this, "Open a File", "", "Model (*.obj)");
     modelPath = filename;
 
     /* File Name */
@@ -60,7 +60,7 @@ QString Menu::getModelPath()
 void Menu::on_buttonDiffuseMap_clicked()
 {
     /* Open Diffuse Map */
-    QString filename = QFileDialog::getOpenFileName(this, "Open a File", "/home/asus/Pulpit", "Diffuse (*.jpg *.png)");
+    QString filename = QFileDialog::getOpenFileName(this, "Open a File", "", "Diffuse (*.jpg *.png)");
     diffusePath = filename;
 
     /* File Name */
@@ -71,7 +71,7 @@ void Menu::on_buttonDiffuseMap_clicked()
 void Menu::on_buttonNormalMap_clicked()
 {
     /* Open Normal Map */
-    QString filename = QFileDialog::getOpenFileName(this, "Open a File", "/home/asus/Pulpit", "Normal (*.jpg *.png)");
+    QString filename = QFileDialog::getOpenFileName(this, "Open a File", "", "Normal (*.jpg *.png)");
     normalPath = filename;
 
     /* File Name */
@@ -82,7 +82,7 @@ void Menu::on_buttonNormalMap_clicked()
 void Menu::on_buttonAmbientMap_clicked()
 {
     /* Open Ambient Map */
-    QString filename = QFileDialog::getOpenFileName(this, "Open a File", "/home/asus/Pulpit", "Ambient (*.jpg *.png)");
+    QString filename = QFileDialog::getOpenFileName(this, "Open a File", "", "Ambient (*.jpg *.png)");
     ambientPath = filename;
 
     /* File Name */
@@ -93,7 +93,7 @@ void Menu::on_buttonAmbientMap_clicked()
 void Menu::on_buttonSpecularMap_clicked()
 {
     /* Open Specular Map */
-    QString filename = QFileDialog::getOpenFileName(this, "Open a File", "/home/asus/Pulpit", "Specular (*.jpg *.png)");
+    QString filename = QFileDialog::getOpenFileName(this, "Open a File", "", "Specular (*.jpg *.png)");
     specularPath = filename;
 
     /* File Name */
